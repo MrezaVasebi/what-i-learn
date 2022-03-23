@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: appStyle.buttonHeight,
-        borderRadius: appStyle.margin.usual,
+        borderRadius: appStyle.appRadius.usual,
     }
 })

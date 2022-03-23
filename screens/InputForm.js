@@ -1,14 +1,6 @@
-import {
-    AppButtons,
-    AppInput,
-    AppText
-} from '../components'
-import React, { useReducer, } from 'react'
-import {
-    ScrollView,
-    StyleSheet,
-    View
-} from 'react-native'
+import { AppButtons, AppInput, AppText } from '../components'
+import React, { useReducer } from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
 import appColors from '../utility/appColors'
 import { appStyle } from '../utility/appStyle'
@@ -186,7 +178,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingVertical: 25,
         borderColor: appColors.borderColor,
-        borderRadius: appStyle.margin.usual,
+        borderRadius: appStyle.appRadius.usual,
     },
     buttonContainer: {
         marginTop: 20,

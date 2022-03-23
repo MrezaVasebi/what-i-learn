@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         height: appStyle.inputHeight,
         borderColor: appColors.borderColor,
-        borderRadius: appStyle.margin.usual,
+        borderRadius: appStyle.appRadius.usual,
     }
 })
 

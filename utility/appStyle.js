@@ -14,17 +14,13 @@ const appStyle = {
         color: appColors.labelColor
     },
 
+    inputHeight: 45,
     buttonHeight: 45,
 
-    inputHeight: 45,
-
-    margin: {
-        usual: 15,
+    appRadius: {
+        usual: 10,
         special: 20
     }
-
 }
 
-export {
-    appStyle
-}
+export { appStyle }
