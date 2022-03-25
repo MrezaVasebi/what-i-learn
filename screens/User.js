@@ -1,4 +1,8 @@
-import { AppButtons, AppInput, AppText } from '../components'
+import {
+    AppButtons,
+    AppInput,
+    AppText
+} from '../components'
 import { Entypo, Feather } from '@expo/vector-icons'
 import {
     FlatList,
@@ -7,18 +11,25 @@ import {
     TouchableOpacity,
     View
 } from 'react-native'
+import {
+    LanguageContext,
+    ThemeContext,
+    UserContext
+} from '../state-management/context/valueConfig'
 import React, { useContext, useState } from 'react'
-import { ThemeContext, UserContext } from '../state-management/context/valueConfig'
 import { addUser, deleteUser } from '../state-management/context/user'
 
 import appColors from '../utility/appColors'
 import { appStyle } from '../utility/appStyle'
+import { setLanguage } from '../state-management/context/language'
 import { setTheme } from '../state-management/context/theme'
+import switchLanguage from '../modules/switchLanguage'
 
 const User = () => {
 
     const user = useContext(UserContext)
     const theme = useContext(ThemeContext)
+    const lan = useContext(LanguageContext)
 
     const [openPopup, setOpenPopup] = useState(false)
 
@@ -61,16 +72,31 @@ const User = () => {
                 backgroundColor={theme.stateTheme.isLight ? appColors.bgColor : appColors.labelColor}
             />
 
-            <TouchableOpacity
-                onPress={() => theme.dispatchTheme(setTheme(!theme.stateTheme.isLight))}
-                style={{ paddingLeft: 20 }}>
-                {
-                    theme.stateTheme.isLight ?
-                        <Feather name='sun' color={appColors.sun} size={25} />
-                        :
-                        <Entypo name='moon' color={appColors.bgColor} size={25} />
-                }
-            </TouchableOpacity>
+            <View style={styles.settingContainer}>
+                <TouchableOpacity
+                    onPress={() => theme.dispatchTheme(setTheme(!theme.stateTheme.isLight))}
+                >
+                    {
+                        theme.stateTheme.isLight ?
+                            <Feather name='sun' color={appColors.sun} size={25} />
+                            :
+                            <Entypo name='moon' color={appColors.bgColor} size={25} />
+                    }
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => lan.stateLanguage.lan === 'en' ?
+                        lan.dispatchLanguage(setLanguage('fa')) :
+                        lan.dispatchLanguage(setLanguage('en'))}
+                    style={[styles.lan, {
+                        borderColor: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                    }]}
+                >
+                    <AppText labelStyle={{
+                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                    }} label={lan.stateLanguage.lan} />
+                </TouchableOpacity>
+            </View>
 
             <View style={styles.buttonContainer}>
                 <View style={styles.addUserContainer}>
@@ -81,7 +107,10 @@ const User = () => {
                     <TouchableOpacity onPress={() => setOpenPopup(!openPopup)}>
                         <AppText labelStyle={{
                             color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
-                        }} label={'Add new user'} />
+                        }}
+                            // label={'Add new user'}
+                            label={switchLanguage(lan.stateLanguage.lan).addNewUser}
+                        />
                     </TouchableOpacity>
                 </View>
 
@@ -89,7 +118,7 @@ const User = () => {
                     labelStyle={{
                         color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
                     }}
-                    label={`User count: ${user.stateUser.users.length}`} />
+                    label={`${switchLanguage(lan.stateLanguage.lan).userCount}: ${user.stateUser.users.length}`} />
             </View>
 
             {
@@ -100,7 +129,7 @@ const User = () => {
 
                             <View style={styles.eachItem}>
                                 <AppInput
-                                    placeholder='id'
+                                    placeholder={`${switchLanguage(lan.stateLanguage.lan).id}`}
                                     value={userInfo.userId}
                                     keyboardType='number-pad'
                                     inputStyle={[styles.inputStyle, {
@@ -113,7 +142,7 @@ const User = () => {
 
                             <View style={styles.eachItem}>
                                 <AppInput
-                                    placeholder='name'
+                                    placeholder={`${switchLanguage(lan.stateLanguage.lan).name}`}
                                     value={userInfo.name}
                                     inputStyle={[styles.inputStyle, {
                                         color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor,
@@ -126,7 +155,7 @@ const User = () => {
 
                             <View style={styles.eachItem}>
                                 <AppInput
-                                    placeholder='family'
+                                    placeholder={`${switchLanguage(lan.stateLanguage.lan).family}`}
                                     value={userInfo.fname}
                                     inputStyle={[styles.inputStyle, {
                                         color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
@@ -146,7 +175,7 @@ const User = () => {
                                 btnStyle={{
                                     width: '25%',
                                     backgroundColor: appColors.success,
-                                }} label={'Add'} />
+                                }} label={`${switchLanguage(lan.stateLanguage.lan).add}`} />
                         </View>
                     </>
             }
@@ -157,16 +186,16 @@ const User = () => {
                         <View style={[styles.tableView, { paddingHorizontal: 20, marginTop: 20 }]}>
                             <AppText labelStyle={[styles.tableRecord, {
                                 color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
-                            }]} label={'Id'} />
+                            }]} label={`${switchLanguage(lan.stateLanguage.lan).id}`} />
                             <AppText labelStyle={[styles.tableRecord, {
                                 color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
-                            }]} label={'Name'} />
+                            }]} label={`${switchLanguage(lan.stateLanguage.lan).name}`} />
                             <AppText labelStyle={[styles.tableRecord, {
                                 color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
-                            }]} label={'Family'} />
+                            }]} label={`${switchLanguage(lan.stateLanguage.lan).family}`} />
                             <AppText labelStyle={[styles.tableRecord, {
                                 color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
-                            }]} label={'Delete'} />
+                            }]} label={`${switchLanguage(lan.stateLanguage.lan).delete}`} />
                         </View>
 
                         <FlatList
@@ -210,6 +239,18 @@ export default User
 const styles = StyleSheet.create({
     root: {
         ...appStyle.root
+    },
+    settingContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20
+    },
+    lan: {
+        borderWidth: 1,
+        borderRadius: 10,
+        alignItems: 'center',
+        height: 30, width: 30,
+        justifyContent: 'center'
     },
     buttonContainer: {
         padding: 20,
