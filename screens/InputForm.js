@@ -80,14 +80,14 @@ const Form = () => {
             >
                 <View style={styles.titleView}>
                     <AppText
-                        labelStyle={{ fontSize: 18 }}
+                        labelStyle={{ fontSize: 18, fontFamily: 'roboto' }}
                         label={'Fill the Form'} />
                 </View>
                 <View style={styles.container}>
 
                     <View style={styles.fullNameContainer}>
                         <View style={{ width: '49%' }}>
-                            <AppText label={'Name'} />
+                            <AppText labelStyle={{ fontFamily: 'roboto' }} label={'Name'} />
                             <AppInput
                                 value={state.name}
                                 returnKeyType="next"
@@ -97,7 +97,7 @@ const Form = () => {
                         </View>
 
                         <View style={{ width: '49%' }}>
-                            <AppText label={'Family'} />
+                            <AppText labelStyle={{ fontFamily: 'roboto' }} label={'Family'} />
                             <AppInput
                                 value={state.fname}
                                 returnKeyType="next"
@@ -108,7 +108,7 @@ const Form = () => {
                     </View>
 
                     <View>
-                        <AppText label={'Email Address'} />
+                        <AppText labelStyle={{ fontFamily: 'roboto' }} label={'Email Address'} />
                         <AppInput
                             value={state.email}
                             returnKeyType="next"
@@ -119,7 +119,7 @@ const Form = () => {
                     </View>
 
                     <View style={{ marginTop: 10 }}>
-                        <AppText label={'Phone Number'} />
+                        <AppText labelStyle={{ fontFamily: 'roboto' }} label={'Phone Number'} />
                         <AppInput
                             maxLength={10}
                             value={state.phone}
@@ -134,13 +134,13 @@ const Form = () => {
                         <AppButtons
                             label={'OK'}
                             onPress={handleOk}
-                            labelStyle={{ color: appColors.bgColor }}
+                            labelStyle={{ color: appColors.bgColor, fontFamily: 'roboto' }}
                             btnStyle={{ width: '49%', backgroundColor: appColors.success }}
                         />
                         <AppButtons
                             label={'Cancel'}
                             onPress={handleCancel}
-                            labelStyle={{ color: appColors.bgColor }}
+                            labelStyle={{ color: appColors.bgColor, fontFamily: 'roboto' }}
                             btnStyle={{ width: '49%', backgroundColor: appColors.danger }}
                         />
                     </View>

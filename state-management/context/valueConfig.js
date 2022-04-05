@@ -7,9 +7,9 @@ import themeReducer from './theme'
 import { userInitialState } from './user'
 import userReducer from './user'
 
-export const UserContext = React.createContext(userInitialState)
-export const ThemeContext = React.createContext(themeInitialState)
-export const LanguageContext = React.createContext(languageInitialState)
+export const UserContext = React.createContext()
+export const ThemeContext = React.createContext()
+export const LanguageContext = React.createContext()
 
 export const GlobalProvider = ({ children }) => {
     const [stateUser, dispatchUser] = useReducer(userReducer, userInitialState)

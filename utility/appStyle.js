@@ -10,8 +10,8 @@ const appStyle = {
     },
 
     label: {
-        fontSize: 13,
-        color: appColors.labelColor
+        fontSize: 12,
+        color: appColors.labelColor,
     },
 
     inputHeight: 45,

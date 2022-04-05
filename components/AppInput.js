@@ -15,6 +15,7 @@ const AppInput = ({ inputStyle, ...otherProps }) => {
 
 const styles = StyleSheet.create({
     input: {
+        fontSize: 12,
         borderWidth: 1,
         paddingHorizontal: 5,
         height: appStyle.inputHeight,

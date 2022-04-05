@@ -31,6 +31,10 @@ const User = () => {
     const theme = useContext(ThemeContext)
     const lan = useContext(LanguageContext)
 
+    const color = theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+    const backColor = theme.stateTheme.isLight ? appColors.bgColor : appColors.labelColor
+    const font = lan.stateLanguage.lan === 'en' ? 'ubunto' : 'shabnam'
+
     const [openPopup, setOpenPopup] = useState(false)
 
     const [userInfo, setUserInfo] = useState({
@@ -60,16 +64,16 @@ const User = () => {
         setOpenPopup(false)
     }
 
-    const onDeleteUser = (userId) => { user.dispatchUser(deleteUser(userId)) }
+    const onDeleteUser = (userId) => {
+        user.dispatchUser(deleteUser(userId))
+    }
 
     return (
-        <View style={[styles.root, {
-            backgroundColor: theme.stateTheme.isLight ? appColors.bgColor : appColors.labelColor
-        }]}>
+        <View style={[styles.root, { backgroundColor: backColor }]}>
 
             <StatusBar
                 barStyle={theme.stateTheme.isLight ? 'dark-content' : 'light-content'}
-                backgroundColor={theme.stateTheme.isLight ? appColors.bgColor : appColors.labelColor}
+                backgroundColor={backColor}
             />
 
             <View style={styles.settingContainer}>
@@ -89,11 +93,12 @@ const User = () => {
                         lan.dispatchLanguage(setLanguage('fa')) :
                         lan.dispatchLanguage(setLanguage('en'))}
                     style={[styles.lan, {
-                        borderColor: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                        borderColor: color
                     }]}
                 >
                     <AppText labelStyle={{
-                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                        color: color,
+                        fontSize: 15
                     }} label={lan.stateLanguage.lan} />
                 </TouchableOpacity>
             </View>
@@ -102,13 +107,13 @@ const User = () => {
                 <View style={styles.addUserContainer}>
                     <AppText labelStyle={{
                         marginRight: 5,
-                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                        color: color
                     }} label={!openPopup ? '+' : '-'} />
                     <TouchableOpacity onPress={() => setOpenPopup(!openPopup)}>
                         <AppText labelStyle={{
-                            color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                            color: color,
+                            fontFamily: font
                         }}
-                            // label={'Add new user'}
                             label={switchLanguage(lan.stateLanguage.lan).addNewUser}
                         />
                     </TouchableOpacity>
@@ -116,7 +121,8 @@ const User = () => {
 
                 <AppText
                     labelStyle={{
-                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                        color: color,
+                        fontFamily: font
                     }}
                     label={`${switchLanguage(lan.stateLanguage.lan).userCount}: ${user.stateUser.users.length}`} />
             </View>
@@ -133,10 +139,11 @@ const User = () => {
                                     value={userInfo.userId}
                                     keyboardType='number-pad'
                                     inputStyle={[styles.inputStyle, {
-                                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                        color: color,
+                                        fontFamily: font
                                     }]}
                                     onChangeText={(value) => setUserInfo({ ...userInfo, userId: value })}
-                                    placeholderTextColor={theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor}
+                                    placeholderTextColor={appColors.placeholderColor}
                                 />
                             </View>
 
@@ -145,11 +152,12 @@ const User = () => {
                                     placeholder={`${switchLanguage(lan.stateLanguage.lan).name}`}
                                     value={userInfo.name}
                                     inputStyle={[styles.inputStyle, {
-                                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor,
-                                        marginHorizontal: 5
+                                        color: color,
+                                        marginHorizontal: 5,
+                                        fontFamily: font
                                     }]}
                                     onChangeText={(value) => setUserInfo({ ...userInfo, name: value })}
-                                    placeholderTextColor={theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor}
+                                    placeholderTextColor={appColors.placeholderColor}
                                 />
                             </View>
 
@@ -158,10 +166,11 @@ const User = () => {
                                     placeholder={`${switchLanguage(lan.stateLanguage.lan).family}`}
                                     value={userInfo.fname}
                                     inputStyle={[styles.inputStyle, {
-                                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                        color: color,
+                                        fontFamily: font
                                     }]}
                                     onChangeText={(value) => setUserInfo({ ...userInfo, fname: value })}
-                                    placeholderTextColor={theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor}
+                                    placeholderTextColor={appColors.placeholderColor}
                                 />
                             </View>
 
@@ -170,7 +179,8 @@ const User = () => {
                             <AppButtons
                                 onPress={addUserHandler}
                                 labelStyle={{
-                                    color: appColors.bgColor
+                                    fontFamily: font,
+                                    color: appColors.bgColor,
                                 }}
                                 btnStyle={{
                                     width: '25%',
@@ -185,16 +195,20 @@ const User = () => {
                     <>
                         <View style={[styles.tableView, { paddingHorizontal: 20, marginTop: 20 }]}>
                             <AppText labelStyle={[styles.tableRecord, {
-                                color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                color: color,
+                                fontFamily: font
                             }]} label={`${switchLanguage(lan.stateLanguage.lan).id}`} />
                             <AppText labelStyle={[styles.tableRecord, {
-                                color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                color: color,
+                                fontFamily: font
                             }]} label={`${switchLanguage(lan.stateLanguage.lan).name}`} />
                             <AppText labelStyle={[styles.tableRecord, {
-                                color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                color: color,
+                                fontFamily: font
                             }]} label={`${switchLanguage(lan.stateLanguage.lan).family}`} />
                             <AppText labelStyle={[styles.tableRecord, {
-                                color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                color: color,
+                                fontFamily: font
                             }]} label={`${switchLanguage(lan.stateLanguage.lan).delete}`} />
                         </View>
 
@@ -207,16 +221,19 @@ const User = () => {
                                     marginTop: 10,
                                     paddingBottom: 5,
                                     borderBottomWidth: .5,
-                                    borderColor: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                    borderColor: color
                                 }]}>
                                     <AppText labelStyle={[styles.tableRecord, {
-                                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                        color: color,
+                                        fontFamily: font
                                     }]} label={item.userId} />
                                     <AppText labelStyle={[styles.tableRecord, {
-                                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                        color: color,
+                                        fontFamily: font
                                     }]} label={item.name} />
                                     <AppText labelStyle={[styles.tableRecord, {
-                                        color: theme.stateTheme.isLight ? appColors.labelColor : appColors.bgColor
+                                        color: color,
+                                        fontFamily: font
                                     }]} label={item.fname} />
                                     <TouchableOpacity
                                         style={styles.btnDeleteView}
@@ -247,7 +264,7 @@ const styles = StyleSheet.create({
     },
     lan: {
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 5,
         alignItems: 'center',
         height: 30, width: 30,
         justifyContent: 'center'
@@ -258,7 +275,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     addUserContainer: {
-        flexDirection: 'row'
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     userInfoContainer: {
         flexDirection: 'row',
@@ -268,7 +286,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     inputStyle: {
-        marginBottom: 5
+        marginBottom: 5,
     },
     addContainer: {
         paddingHorizontal: 20,

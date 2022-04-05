@@ -1,4 +1,3 @@
-
 const ADD_USER = 'ADD_USER'
 const DELETE_USER = 'DELETE_USER'
 
